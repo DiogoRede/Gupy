@@ -1,0 +1,27 @@
+<?php
+
+    $i=2;
+    $teste=false;
+    $num=0;
+    $fibonacci = [0, 1];
+    $numero = 13;
+
+    while ($teste==false){
+        $fibonacci[$i] = $fibonacci[$i-1]+$fibonacci[$i-2];
+        
+        if (($fibonacci[$i]==$numero) || ($numero==0)){
+            echo "Numero Pertence a sequencia!<br>";
+            $teste=true;
+        }else if ($fibonacci[$i]>$numero){
+            echo "Numero Não pertence a sequencia!<br>";
+            $teste=true;
+        }
+
+        $i+=1;
+    }
+
+    foreach($fibonacci as $or => $dado){
+            echo  " | " . $dado ;
+    }
+
+?>
