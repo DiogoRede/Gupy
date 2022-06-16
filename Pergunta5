@@ -1,0 +1,11 @@
+<?php
+
+    $string = 'Diogo Rede de Araujo';
+    $reversa='';
+
+    for($i=0;$i<strlen($string);$i++){
+        $reversa[strlen($string)-$i] = $string[$i];    
+    }
+
+    echo $reversa . "<br>" . $string;
+?>
