@@ -1,0 +1,56 @@
+<?php
+    $json = file_get_contents("dados.json");
+
+    $json = json_decode($json);
+
+    $faturamento = [];
+    $mediaMensal=0;
+    $i=0;
+    $dia = [];
+
+    foreach ($json as $info => $dado){
+      $valor = $dado->valor;
+      $data  = $dado->dia;
+      $mediaMensal+= $valor; 
+
+      if ($i==0){
+        $faturamento[0]=$valor;
+        $faturamento[1]=$valor;
+      }
+
+      if ($valor!=0.0){
+            if ($valor>$faturamento[1]){
+                $faturamento[1] = $valor;
+            }
+    
+            if ($valor<$faturamento[0]){
+                $faturamento[0] = $valor;
+            }
+            $i++;
+      }
+
+    }
+    $mediaMensal = $mediaMensal/$i;
+    foreach ($json as $info => $dado){
+        if ($mediaMensal<$dado->valor){
+            array_push($dia, $dado->dia);
+        }
+
+    }
+
+    function dias($dias){
+        $dia = $dias;
+        $t = '';
+        $i=0;
+        while( isset($dia[$i]) ){
+            $t = $t . "| " . $dia[$i];
+            $i++;
+        }
+        return $i . "<br>";
+    }
+
+    echo "Menor valor de faturamento ocorrido em um dia do mês: " . $faturamento[0] . "<br>";
+    echo "Maior valor de faturamento ocorrido em um dia do mês: " . $faturamento[1] . "<br>";
+    echo "Número de dias no mês em que o valor de faturamento diário foi superior à média mensal: " . dias($dia);
+
+?>
